@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Web期末作业</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        table {
+            width: 60%;
+            margin: 100px auto;
+            border-collapse: collapse; /*边框合并模式*/
+            text-align: center;
+        }
+
+        td, th {
+            border: 2px solid RGB(51,181,229);
+        }
+
+        thead tr {
+            height: 40px;
+            background-color: RGB(51,181,229);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Start your project here-->
+    <!--Main Navigation-->
+    <header>
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark info-color fixed-top">
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="#">音乐台</a>
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="basicExampleNav">
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./index.html">
+                            音乐大厅
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./MyMusic.html">我的音乐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://blog.csdn.net/xsqxsqx/article/details/116379110" target="_blank">Web结课报告</a>
+                    </li>
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">设置</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">下载设置</a>
+                            <a class="dropdown-item" href="#">退出用户</a>
+                            <a class="dropdown-item" href="#">反馈</a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Links -->
+                <form class="form-inline">
+                    <div class="md-form my-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="找音乐" aria-label="Search" id="in" value="" autocomplete="off">
+                    </div>
+                </form>
+                <!--<input type="text" id="in" value="">-->
+                <button class="btn btn-info btn-rounded" type="submit" id="btn" onclick="ajaxPost( )">Search</button>
+            </div>
+            <!-- Collapsible content -->
+        </nav>
+        <!--/.Navbar-->
+    </header>
+
+
+    <!--Main layout-->
+    <main>
+        <div class="container">
+
+            <div class="view">
+                <img src="img/myimgs/4.jpg" width=100% height="500">
+                <!-- Mask & flexbox options-->
+                <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
+                    <!-- Content -->
+                    <div class="container px-md-3 px-sm-0">
+                        <!--Grid row-->
+                        <div class="row wow fadeIn">
+                            <!--Grid column-->
+                            <div class="col-md-12 mb-4 blue-text text-center wow fadeIn">
+                                <h3 class="display-3 font-weight-light blue-text mb-0 pt-md-5 pt-5">FIND MUSIC</h3>
+                                <hr class="hr-light my-4 w-75">
+                                <h4 class="subtext-header mt-2 mb-4">每次总能在不经意间发现好音乐！</h4>
+                            </div>
+                            <!--Grid column-->
+                        </div>
+                        <!--Grid row-->
+                    </div>
+                    <!-- Content -->
+                </div>
+            </div>
+        </div>
+    </main>
+    <table id="tab">
+        <thead>
+            <tr>
+                <th>歌名</th>
+                <th>歌手</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+    </table>
+    <!--Main layout-->
+    <!-- Footer -->
+    <footer class="page-footer font-small info-color pt-4 mt-4">
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2021 Copyright:CQJTU xsq<br />
+            <a href="https://1747816101.qq.com"> 1747816101@qq.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->I
+    <!-- End your project here-->
+    <!-- jQuery -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script type="text/javascript">
+        //ajax 对象
+        function ajaxObject() {
+            var xmlHttp;
+            try {
+                // Firefox, Opera 8.0+, Safari
+                xmlHttp = new XMLHttpRequest();
+            }
+            catch (e) {
+                // Internet Explorer
+                try {
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try {
+                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e) {
+                        alert("您的浏览器不支持AJAX！");
+                        return false;
+                    }
+                }
+            }
+            return xmlHttp;
+        }
+        //https ://v1.alapi.cn/api/music/search?keyword=%E2%80%9C%E6%96%AD%E6%A1%A5%E6%AE%8B%E9%9B%AA%E2%80%9D
+        //https ://music.163.com/song/media/outer/url?id=191254.mp3
+        // ajax post请求：
+        function ajaxPost() {
+            var url = 'https://v1.alapi.cn/api/music/search?keyword=' + encodeURI(document.getElementById('in').value);
+            //alert('enter1');
+            var ajax = ajaxObject();
+            ajax.open("get", url, true);
+            ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+            //alert('enter2');
+            ajax.onreadystatechange = function () {
+
+                
+                if (ajax.readyState == 4) {
+
+                    if (ajax.status == 200) {
+                        var response = JSON.parse(ajax.responseText);
+                        var songUrlList = [];
+
+                        var id1 = response.data.songs[0].id;
+                        var songname = response.data.songs[0].name;
+                        var artistname = response.data.songs[0].artists[0].name;
+                        var htt = 'https://music.163.com/song/media/outer/url?id=' + id1 + '.mp3 ';
+
+                        var id12 = response.data.songs[1].id;
+                        var songname2 = response.data.songs[1].name;
+                        var artistname2 = response.data.songs[1].artists[0].name;
+                        var htt2 = 'https://music.163.com/song/media/outer/url?id=' + id12 + '.mp3 ';
+
+                        var id13 = response.data.songs[2].id;
+                        var songname3 = response.data.songs[2].name;
+                        var artistname3 = response.data.songs[2].artists[0].name;
+                        var htt3 = 'https://music.163.com/song/media/outer/url?id=' + id13 + '.mp3 ';
+
+                        var id14 = response.data.songs[3].id;
+                        var songname4 = response.data.songs[3].name;
+                        var artistname4 = response.data.songs[3].artists[0].name;
+                        var htt4 = 'https://music.163.com/song/media/outer/url?id=' + id14 + '.mp3 ';
+
+                        var id15 = response.data.songs[4].id;
+                        var songname5 = response.data.songs[4].name;
+                        var artistname5 = response.data.songs[4].artists[0].name;
+                        var htt5 = 'https://music.163.com/song/media/outer/url?id=' + id15 + '.mp3 ';
+
+                        var id16 = response.data.songs[5].id;
+                        var songname6 = response.data.songs[5].name;
+                        var artistname6 = response.data.songs[5].artists[0].name;
+                        var htt6 = 'https://music.163.com/song/media/outer/url?id=' + id16 + '.mp3 ';
+
+                        var id17 = response.data.songs[6].id;
+                        var songname7 = response.data.songs[6].name;
+                        var artistname7 = response.data.songs[6].artists[0].name;
+                        var htt7 = 'https://music.163.com/song/media/outer/url?id=' + id17 + '.mp3 ';
+
+                        var id18 = response.data.songs[7].id;
+                        var songname8 = response.data.songs[7].name;
+                        var artistname8 = response.data.songs[7].artists[0].name;
+                        var htt8 = 'https://music.163.com/song/media/outer/url?id=' + id18 + '.mp3 ';
+
+                        songUrlList.push(htt);
+                        songUrlList.push(htt2);
+                        songUrlList.push(htt3);
+                        songUrlList.push(htt4);
+                        songUrlList.push(htt5);
+                        songUrlList.push(htt6);
+                        songUrlList.push(htt7);
+                        songUrlList.push(htt8);
+                        //alert(songUrlList[0]);
+                        //alert(songname);
+                        //alert(artistname);
+                        //alert(htt);
+                        //window.open(htt, "_self");
+                        //0,删除操作
+                        var as = document.querySelectorAll("a.white");
+                        var len = as.length;                       
+                        for (var i = 0; i < len; i++) {
+                            if (i < len) {
+                                $("#tab tbody").html("");
+                                break;
+                            }                                                    
+                        }
+                        //1,先准备数据
+                        var datas = [{
+                            name: songname,
+                            subject: artistname,
+
+                        }, {
+                            name: songname5,
+                            subject: artistname5,
+
+                        }, {
+                            name: songname2,
+                            subject: artistname2,
+
+                        }, {
+                            name: songname3,
+                            subject: artistname3,
+
+                        }
+                            , {
+                            name: songname4,
+                            subject: artistname4,
+
+
+                            }, {
+                                name: songname6,
+                                subject: artistname6,
+
+                            }, {
+                                name: songname7,
+                                subject: artistname7,
+
+                            }, {
+                                name: songname8,
+                                subject: artistname8,
+
+                            }
+                        ];
+                        //2,往tbody里面创建行，有几个人（通过数组的长度）我们就创建几行
+                        var tbody = document.querySelector("tbody");
+                        for (var i = 0; i < datas.length; i++)  //外面的for循环 是 行tr
+                        {
+                            var tr = document.createElement("tr");
+                            tbody.appendChild(tr);
+                            //3,往tr每一行里面创建单元格（跟数据有关系的3个单元格），td单元格的数量取决于每个对象的属性个数 for循环遍历对象 datas[i]
+                            for (var k in datas[i])   //里面的for循环是 列
+                            {
+                                var td = document.createElement("td");  //创建单元格
+                                tr.appendChild(td);
+                                td.innerHTML = datas[i][k]; //把对象里面的属性值 datas[i][k]给td
+                            }
+                            //4，创建有删除二字的单元格
+                            var td = document.createElement("td");
+                            tr.appendChild(td);
+                            //td.innerHTML = "<a href='javascript:;'  >播放</a>";
+                            td.innerHTML = "<a href='javascript:;' class='white' >播放</a>";
+                             
+                        }
+
+                        //5,播放操作
+                        var as = document.querySelectorAll("a.white");
+                        as[0].onclick = function () {            
+                            window.open(songUrlList[0]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                        as[1].onclick = function () {  
+                            //alert(num);
+                            window.open(songUrlList[1]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                        as[2].onclick = function () {  
+                            //alert(num);
+                            window.open(songUrlList[2]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                        as[3].onclick = function () { 
+                            //alert(num);
+                            window.open(songUrlList[3]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                        as[4].onclick = function () {  
+                            //alert(num);
+                            window.open(songUrlList[4]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                        as[5].onclick = function () {
+                            //alert(num);
+                            window.open(songUrlList[5]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                        as[6].onclick = function () {
+                            //alert(num);
+                            window.open(songUrlList[6]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                        as[7].onclick = function () {
+                            //alert(num);
+                            window.open(songUrlList[7]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                        as[8].onclick = function () {
+                            //alert(num);
+                            window.open(songUrlList[8]);
+                            //tbody.removeChild(this.parentNode.parentNode);
+                        }
+                    }
+
+                }
+
+            }
+            //<bgsound src="https ://music.163.com/song/media/outer/url?id=191254.mp3" loop="-1">
+            ajax.send(null);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
